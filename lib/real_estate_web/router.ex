@@ -20,7 +20,14 @@ defmodule RealEstateWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", RealEstateWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", RealEstateWeb do
+    pipe_through :api
+    scope "/v1" do
+      resources "/users", UserController, except: [:new, :edit]
+      post "/registrations", RegistrationController, :create
+      post "/sessions", SessionController, :create
+      delete "/sessions", SessionController, :delete
+      get "/current_user", CurrentUserController, :show
+    end
+  end
 end

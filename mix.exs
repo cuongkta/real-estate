@@ -57,7 +57,9 @@ defmodule RealEstate.Mixfile do
      {:faker, "~> 0.8", only: [:dev, :test]},
      {:distillery, "~> 1.5", runtime: false},
      {:conform, "~> 2.5"},
-     {:appsignal, "~> 1.0"}
+     {:appsignal, "~> 1.0"},
+     {:comeonin, "~> 3.0"},
+     {:guardian, "~> 1.0"},
     ]
   end
 
