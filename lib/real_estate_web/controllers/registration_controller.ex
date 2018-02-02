@@ -1,4 +1,3 @@
-#require IEx
 defmodule RealEstateWeb.RegistrationController  do
   use RealEstateWeb, :controller
   alias RealEstate.Account.User
@@ -10,11 +9,9 @@ defmodule RealEstateWeb.RegistrationController  do
   def create(conn, %{"user" => user_params}) do
     
     changeset = User.changeset(%User{}, user_params)
-    #IEx.pry
     case Repo.insert(changeset) do
       {:ok, user} ->
         {:ok, token, _full_claims} = RealEstate.Auth.Guardian.encode_and_sign(user)
-
         conn
         |> put_status(:created)
         |> render(RealEstateWeb.SessionView, "show.json", jwt: token, user: user)
