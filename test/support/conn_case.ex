@@ -19,7 +19,7 @@ defmodule RealEstateWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias RealEstateWeb.Router.Helpers, as: Routes
+      import RealEstateWeb.Router.Helpers
 
       # The default endpoint for testing
       @endpoint RealEstateWeb.Endpoint

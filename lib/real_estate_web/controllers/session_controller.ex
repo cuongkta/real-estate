@@ -20,7 +20,7 @@ defmodule RealEstateWeb.SessionController do
   end
 
 
-  def unauthenticated(conn, _params) do
+  def auth_error(conn, _params, _opts) do
     conn
     |> put_status(:forbidden)
     |> render(RealEstateWeb.SessionView, "forbidden.json", error: "Not Authenticated")

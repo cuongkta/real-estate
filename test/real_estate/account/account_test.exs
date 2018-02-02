@@ -2,12 +2,13 @@ defmodule RealEstate.AccountTest do
   use RealEstate.DataCase
 
   alias RealEstate.Account
+  alias Comeonin.Bcrypt
 
   describe "users" do
     alias RealEstate.Account.User
 
-    @valid_attrs %{email: "some email", password: "some password"}
-    @update_attrs %{email: "some updated email", password: "some updated password"}
+    @valid_attrs %{email: "a@gmail.com", password: "some password"}
+    @update_attrs %{email: "b@gmail.com", password: "some updated password"}
     @invalid_attrs %{email: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -31,8 +32,8 @@ defmodule RealEstate.AccountTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Account.create_user(@valid_attrs)
-      assert user.email == "some email"
-      assert user.password == "some password"
+      assert user.email == "a@gmail.com"
+      assert Bcrypt.checkpw("some password", user.password) == true
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -43,8 +44,8 @@ defmodule RealEstate.AccountTest do
       user = user_fixture()
       assert {:ok, user} = Account.update_user(user, @update_attrs)
       assert %User{} = user
-      assert user.email == "some updated email"
-      assert user.password == "some updated password"
+      assert user.email == "b@gmail.com"
+      assert Bcrypt.checkpw("some updated password", user.password) == true
     end
 
     test "update_user/2 with invalid data returns error changeset" do

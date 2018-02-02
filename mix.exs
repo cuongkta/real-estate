@@ -40,7 +40,7 @@ defmodule RealEstate.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:wallaby, "~> 0.19.1", only: :test},
+     #{:wallaby, "~> 0.19.1", only: :test},
      {:gettext, "~> 0.11"},
      {:poison, "~> 2.0"},
      {:httpoison, "~> 0.12"},

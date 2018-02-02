@@ -11,6 +11,16 @@ defmodule RealEstateWeb.ErrorView do
   # the template name. For example, "404.html" becomes
   # "Not Found".
   def template_not_found(template, _assigns) do
-    Phoenix.Controller.status_message_from_template(template)
+    status_message_from_template(template)
+  end
+
+  def status_message_from_template(template) do
+    template
+    |> String.split(".")
+    |> hd()
+    |> String.to_integer()
+    |> Plug.Conn.Status.reason_phrase()
+  rescue
+    _ -> "Internal Server Error"
   end
 end

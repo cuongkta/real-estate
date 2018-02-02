@@ -1,10 +1,10 @@
-defmodule RealEstate.CurrentUserController do
+defmodule RealEstateWeb.CurrentUserController do
   use RealEstateWeb, :controller
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: RealEstate.SessionController
+  plug Guardian.Plug.EnsureAuthenticated, error_handler: RealEstateWeb.SessionController
 
   def show(conn, _) do
-    user = Guardian.Plug.current_resource(conn)
+    user = RealEstate.Auth.Guardian.Plug.current_resource(conn)
 
     conn
     |> put_status(:ok)

@@ -11,7 +11,20 @@ defmodule RealEstateWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    #plug Guardian.Plug.VerifyHeader
+    #plug Guardian.Plug.LoadResource
+    #plug RealEstate.Auth.Pipeline
   end
+
+  pipeline :unauthorized do
+    plug :fetch_session
+  end
+
+  pipeline :authorized do
+    plug :fetch_session
+    plug RealEstate.Auth.Pipeline
+  end
+
 
   scope "/", RealEstateWeb do
     pipe_through :browser # Use the default browser stack
@@ -20,14 +33,24 @@ defmodule RealEstateWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", RealEstateWeb do
+  scope "/api", RealEstateWeb, as: :api do
     pipe_through :api
-    scope "/v1" do
-      resources "/users", UserController, except: [:new, :edit]
-      post "/registrations", RegistrationController, :create
-      post "/sessions", SessionController, :create
-      delete "/sessions", SessionController, :delete
-      get "/current_user", CurrentUserController, :show
+    scope "/v1", as: :v1 do
+      scope "/" do
+        pipe_through :unauthorized
+        post "/sessions", SessionController, :create
+        post "/registrations", RegistrationController, :create
+      end
+
+      scope "/" do
+        pipe_through :authorized
+  
+        delete "/sessions", SessionController, :delete
+        get "/current_user", CurrentUserController, :show
+        resources "/users", UserController, except: [:new, :edit]
+      end
+      
+          
     end
   end
 end

@@ -20,11 +20,11 @@ defmodule RealEstate.Auth do
     |> check_password(password)
   end
 
-  defp check_password(nil, _), do: {:error, "Incorrect username or password"}
+  defp check_password(nil, _), do: :error
   defp check_password(user, plain_text_password) do
     case Bcrypt.checkpw(plain_text_password, user.password) do
       true -> {:ok, user}
-      false -> {:error, "Incorrect username or password"}
+      _ -> :error
     end
   end
 
