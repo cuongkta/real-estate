@@ -3,7 +3,10 @@ defmodule RealEstateWeb.CurrentUserView do
 
   def render("show.json", %{user: user}) do
     %{
-      user: user
+      user:  %{
+        id: user.id,
+        email: user.email
+      }
     }
   end
 

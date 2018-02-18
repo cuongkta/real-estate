@@ -23,6 +23,7 @@ defmodule RealEstateWeb.Router do
   pipeline :authorized do
     plug :fetch_session
     plug RealEstate.Auth.Pipeline
+    plug RealEstate.Plug.CurrentUser
   end
 
 
@@ -48,9 +49,22 @@ defmodule RealEstateWeb.Router do
         delete "/sessions", SessionController, :delete
         get "/current_user", CurrentUserController, :show
         resources "/users", UserController, except: [:new, :edit]
+        resources "/projects", ProjectController, except: [:new, :edit]
       end
       
           
     end
+  end
+
+  pipeline :exq do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :put_secure_browser_headers
+    plug ExqUi.RouterPlug, namespace: "exq"
+  end
+  scope "/exq", ExqUi do
+    pipe_through :exq
+    forward "/", RouterPlug.Router, :index
   end
 end

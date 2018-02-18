@@ -20,11 +20,25 @@ defmodule RealEstateWeb.SessionController do
   end
 
 
-  def auth_error(conn, _params, _opts) do
+  def auth_error(conn, {type, _reason}, _opts) do
     conn
     |> put_status(:forbidden)
-    |> render(RealEstateWeb.SessionView, "forbidden.json", error: "Not Authenticated")
+    |> render(RealEstateWeb.SessionView, "forbidden.json", error: to_string(type))
   end
+
+
+  def handle_unauthorized(conn) do
+    conn
+    |> put_status(:forbidden)
+    |> render(RealEstateWeb.SessionView, "forbidden.json", error: "You can't access  the resource")
+  end 
+
+
+  def handle_not_found(conn) do 
+    conn
+    |> put_status(404)
+    |> render(RealEstateWeb.SessionView, "forbidden.json", error: "That resource does not exist!")
+  end 
 
   
 end

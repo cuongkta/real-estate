@@ -8,6 +8,8 @@ defmodule RealEstate.Account.User do
     field :email, :string
     field :password, :string
 
+    has_many :projects, RealEstate.Condos.Project, on_delete: :delete_all
+
     timestamps()
   end
 

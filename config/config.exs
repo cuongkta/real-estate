@@ -28,7 +28,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-
+config :canary,
+  repo: RealEstate.Repo,
+  current_user: :current_user,
+  unauthorized_handler: {RealEstateWeb.SessionController, :handle_unauthorized},
+  not_found_handler: {RealEstateWeb.SessionController, :handle_not_found}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
@@ -40,3 +44,21 @@ config :real_estate, RealEstate.Auth.Guardian,
   ttl: { 3, :days },
   verify_issuer: true,
   secret_key: "lksdjowiurowieurlkjsdlwwer"
+
+config :exq,
+  name: Exq,
+  host: "127.0.0.1",
+  port: 6379,
+  namespace: "exq",
+  concurrency: :infinite,
+  queues: ["subscribe"],
+  poll_timeout: 50,
+  scheduler_poll_timeout: 200,
+  scheduler_enable: true,
+  max_retries: 25,
+  shutdown_timeout: 5000
+
+config :exq_ui,
+  web_port: 4040,
+  web_namespace: "",
+  server: true

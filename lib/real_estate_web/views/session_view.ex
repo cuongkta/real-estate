@@ -4,7 +4,10 @@ defmodule RealEstateWeb.SessionView do
   def render("show.json", %{jwt: jwt, user: user}) do
     %{
       jwt: jwt,
-      user: user
+      user: %{
+        id: user.id,
+        email: user.email
+      }
     }
   end
 

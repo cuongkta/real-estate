@@ -3,7 +3,7 @@ defmodule RealEstate.Auth.Pipeline do
 
   use Guardian.Plug.Pipeline,
     otp_app: :real_estate,
-    error_handler: RealEstate.Auth.ErrorHandler,
+    error_handler: RealEstateWeb.SessionController,
     module: RealEstate.Auth.Guardian
 
   #plug Guardian.Plug.VerifySession

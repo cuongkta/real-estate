@@ -22,6 +22,7 @@ defmodule RealEstateWeb do
       use Phoenix.Controller, namespace: RealEstateWeb
 
       import Plug.Conn
+      import Canary.Plugs
       import RealEstateWeb.Gettext
       alias RealEstateWeb.Router.Helpers, as: Routes
     end

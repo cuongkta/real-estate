@@ -20,7 +20,7 @@ defmodule RealEstate.Mixfile do
   def application do
     [
       mod: {RealEstate.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :exq, :exq_ui]
     ]
   end
 
@@ -46,12 +46,12 @@ defmodule RealEstate.Mixfile do
      {:httpoison, "~> 0.12"},
      {:cowboy, "~> 1.0"},
      {:timex, "~> 3.1"},
-     {:nimble_csv, "~> 0.1.0"},
+     #{:nimble_csv, "~> 0.1.0"},
      {:temp, "~> 0.4"},
      {:arc, "~> 0.8.0"},
-     {:coherence, "~> 0.4.0"},
+     #{:coherence, "~> 0.4.0"},
      {:phoenix_html_sanitizer, "~> 1.0"},
-     {:swoosh, "~> 0.5.0"}, #due to coherence SMTP
+     #{:swoosh, "~> 0.5.0"}, #due to coherence SMTP
      {:gen_smtp, "~> 0.11.0"}, #due to coherence SMTP
      {:credo, "~> 0.7", only: [:dev, :test]},
      {:faker, "~> 0.8", only: [:dev, :test]},
@@ -60,6 +60,9 @@ defmodule RealEstate.Mixfile do
      {:appsignal, "~> 1.0"},
      {:comeonin, "~> 3.0"},
      {:guardian, "~> 1.0"},
+     {:canary, "~> 1.1.1"},
+     {:exq, "~> 0.10.1"},
+     {:exq_ui, "~> 0.9.0"}
     ]
   end
 
