@@ -45,7 +45,7 @@ defmodule RealEstate.Mixfile do
      {:poison, "~> 2.0"},
      {:httpoison, "~> 0.12"},
      {:cowboy, "~> 1.0"},
-     {:timex, "~> 3.1"},
+     {:timex, "~> 3.1.13"},
      #{:nimble_csv, "~> 0.1.0"},
      {:temp, "~> 0.4"},
      {:arc, "~> 0.8.0"},
@@ -53,8 +53,8 @@ defmodule RealEstate.Mixfile do
      {:phoenix_html_sanitizer, "~> 1.0"},
      #{:swoosh, "~> 0.5.0"}, #due to coherence SMTP
      {:gen_smtp, "~> 0.11.0"}, #due to coherence SMTP
-     {:credo, "~> 0.7", only: [:dev, :test]},
-     {:faker, "~> 0.8", only: [:dev, :test]},
+     {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
+     {:faker, "~> 0.9", only: [:dev, :test]},
      {:distillery, "~> 1.5", runtime: false},
      {:conform, "~> 2.5"},
      {:appsignal, "~> 1.0"},
@@ -62,7 +62,8 @@ defmodule RealEstate.Mixfile do
      {:guardian, "~> 1.0"},
      {:canary, "~> 1.1.1"},
      {:exq, "~> 0.10.1"},
-     {:exq_ui, "~> 0.9.0"}
+     {:exq_ui, "~> 0.9.0"},
+     {:quantum, "~> 2.2.3"}
     ]
   end
 
